@@ -1,0 +1,14 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MultiLabelBinarizer
+
+# Load dataset
+data = pd.read_csv('movies_dataset.csv')
+data['genre'] = data['genre'].apply(lambda x: x.split(','))
+
+# Multi-label binarizer
+mlb = MultiLabelBinarizer()
+y = mlb.fit_transform(data['genre'])
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(data['plot_summary'], y, test_size=0.2, random_state=42)
