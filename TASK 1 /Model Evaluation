@@ -1,5 +1,12 @@
-from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score, classification_report
 
-X_test_tfidf = tfidf.transform(X_test)
-y_pred = model.predict(X_test_tfidf)
-print(classification_report(y_test, y_pred))
+y_pred_nb = nb.predict(X_test_tfidf)
+y_pred_lr = lr.predict(X_test_tfidf)
+y_pred_svm = svm.predict(X_test_tfidf)
+
+print("Naive Bayes Accuracy:", accuracy_score(y_test, y_pred_nb))
+print("Logistic Regression Accuracy:", accuracy_score(y_test, y_pred_lr))
+print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
+
+print("Classification Report (Logistic Regression):")
+print(classification_report(y_test, y_pred_lr, target_names=mlb.classes_))
